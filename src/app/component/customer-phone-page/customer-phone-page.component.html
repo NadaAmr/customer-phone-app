@@ -1,0 +1,44 @@
+<div>
+    <mat-form-field *ngFor="let filter of filterSelectObj" style="margin-left: 15px;">
+      <mat-label>Filter {{filter.name}}</mat-label>
+      <select matNativeControl name="{{filter.columnProp}}"
+        (change)="filterChange(filter,$event)">
+        <option value="">-- Select {{filter.name}} --</option>
+        <option [value]="item" *ngFor="let item of filter.options">{{item}}</option>
+      </select>
+    </mat-form-field>
+    &nbsp;
+  </div>
+
+<mat-table class="lessons-table mat-elevation-z8" [dataSource]="customerPhones">
+
+    <ng-container matColumnDef="phoneNumber">
+        <mat-header-cell *matHeaderCellDef>phoneNumber</mat-header-cell>
+        <mat-cell *matCellDef="let phone">{{phone.phoneNumber}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="country">
+        <mat-header-cell *matHeaderCellDef>Country</mat-header-cell>
+        <mat-cell class="description-cell"
+                  *matCellDef="let phone">{{phone.country}}</mat-cell>
+
+    </ng-container>
+
+    <ng-container matColumnDef="countryCode">
+        <mat-header-cell *matHeaderCellDef>CountryCode</mat-header-cell>
+        <mat-cell class="duration-cell"
+                  *matCellDef="let phone">{{phone.countryCode}}</mat-cell>
+    </ng-container>
+
+<ng-container matColumnDef="state">
+        <mat-header-cell *matHeaderCellDef>State</mat-header-cell>
+        <mat-cell class="duration-cell"
+                  *matCellDef="let phone">{{phone.state}}</mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+
+</mat-table>
+<mat-paginator [pageSize]="pageSize" [length]="totalPages">
